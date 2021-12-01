@@ -21,7 +21,7 @@ function App(props) {
   // Winner
   const [winner, setWinner] = useState(false);
   const [tie, setTie] = useState(false);
-  // Trash 
+  // Trash
   const [message, setMessage] = useState("");
 
   // Timer reset
@@ -32,7 +32,9 @@ function App(props) {
 
   // clear timeout
   useEffect(() => {
-    const timeOut = setTimeout(() => {setMessage("")}, 3000);
+    const timeOut = setTimeout(() => {
+      setMessage("");
+    }, 3000);
     return () => clearTimeout(timeOut);
   }, [message]);
 
@@ -71,7 +73,6 @@ function App(props) {
 
   // Random Handler
   const randomHandler = () => {
-    console.log("stackArray", props.state.stackArray);
     if (props.state.stackArray.length === numberOfRow * numberOfRow) {
       return;
     }
@@ -87,7 +88,7 @@ function App(props) {
   // Trash Talk Handler
   const trashTalkHandler = () => {
     setMessage(yourMother());
-  }
+  };
 
   return (
     <div className="App">
@@ -149,13 +150,21 @@ function App(props) {
         </div>
 
         <div>
-          <button className="button" onClick={trashTalkHandler}>Trash Talk</button>
+          <button className="button" onClick={trashTalkHandler}>
+            Trash Talk
+          </button>
         </div>
-        <div className="yourMother" >
-          {<h2 id="yourMotherData" style={{direction : "rtl"}}>{message}</h2>}
+        <div className="yourMother">
+          {
+            <h2 id="yourMotherData" style={{ direction: "rtl" }}>
+              {message}
+            </h2>
+          }
         </div>
         <div>
-          <button className="button" onClick={trashTalkHandler}>Trash Talk</button>
+          <button className="button" onClick={trashTalkHandler}>
+            Trash Talk
+          </button>
         </div>
         <div className="footer"></div>
       </div>
