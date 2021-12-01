@@ -1,0 +1,129 @@
+.App {
+  background: linear-gradient(to bottom right, #fca311, #e5e5e5);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.container {
+  width: 80%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 9em;
+  min-height: 100vh;
+  align-items: center;
+  position: relative;
+}
+
+.middle-grid-vs-clock {
+  padding: 1.3em 0 0.5em 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.middle-grid-vs-clock-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  width: 20%;
+  height: 3em;
+  background-color: #14213d;
+  border: none;
+  color: #e5e5e5;
+  text-decoration: none;
+  font-size: 20px;
+  border-radius: 10px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #2e4d8e;
+}
+
+#board {
+  display: grid;
+  grid-auto-rows: 150px;
+}
+
+.text-input {
+  margin-top: 3em;
+  width: 100%;
+  height: 8em;
+}
+
+.box {
+  border: black 1px solid;
+  transition: border ease-out;
+  filter: red;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: 4s;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box:hover {
+  background-color: #fedca6;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.data {
+  font-style: italic;
+}
+
+.inner-text {
+  font-size: 3em;
+}
+
+.player-data {
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.playerName {
+  position: relative;
+}
+
+#setting {
+  position: absolute;
+  top: -3.7em;
+  right: 5em;
+}
+
+.yourMother {
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
