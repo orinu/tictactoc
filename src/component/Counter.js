@@ -1,18 +1,18 @@
 import { useSelector } from "react-redux";
 import React from "react";
 
-const CountDownTimer = (props) => {
+const CountDownTimer = ({ mins, secs, resetTimer, setTime, randomHandler }) => {
   // get state array from redux
   const stateArray = useSelector((state) => state.stateArray);
   // clock move function
   const tick = () => {
-    if (props.mins === 0 && props.secs === 0) {
-      props.randomHandler();
-      props.resetTimer();
-    } else if (props.secs === 0) {
-      props.setTime([props.mins - 1, 59]);
+    if (mins === 0 && secs === 0) {
+      randomHandler();
+      resetTimer();
+    } else if (secs === 0) {
+      setTime([mins - 1, 59]);
     } else {
-      props.setTime([props.mins, props.secs - 1]);
+      setTime([mins, secs - 1]);
     }
   };
   // interval for clock move
@@ -23,7 +23,7 @@ const CountDownTimer = (props) => {
 
   return (
     <div>
-      <p>{`${props.mins.toString().padStart(2, "0")}:${props.secs
+      <p>{`${mins.toString().padStart(2, "0")}:${secs
         .toString()
         .padStart(2, "0")}`}</p>
     </div>

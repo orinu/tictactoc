@@ -15,7 +15,7 @@ import { winCondition, tieCheck } from "./utils/winCondition";
 
 import "./App.css";
 
-function App(props) {
+function App() {
   const dispatch = useDispatch();
   // selectors
   const timeSec = useSelector((state) => state.time);
@@ -125,7 +125,7 @@ function App(props) {
         </div>
         <YourMother message={message} />
         <div>
-          <TrashTalk setMessage={setMessage} player={2}/>
+          <TrashTalk setMessage={setMessage} player={2} />
         </div>
         <div className="footer"></div>
       </div>
@@ -134,6 +134,5 @@ function App(props) {
     </div>
   );
 }
-
 
 export default App;
