@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import CountDownTimer from "./component/Counter";
 import { useDispatch, connect } from "react-redux";
 
+import Board from "./component/Board";
 import Modal from "./component/StartModal";
 import ModalWinner from "./component/ModalWinner";
 import * as action from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
 import yourMother from "./utils/youreMother";
+
 import "./App.css";
 
 function App(props) {
@@ -37,19 +39,6 @@ function App(props) {
     }, 3000);
     return () => clearTimeout(timeOut);
   }, [message]);
-
-  // render number of boxs from user input
-  const renderBox = (boxNumber) => {
-    const boxs = [];
-    for (let i = 0; i < numberOfRow * numberOfRow; i++) {
-      boxs.push(
-        <div key={i} className={`box box${i}`} onClick={() => move(i)}>
-          <span className="inner-text">{props.state.stateArray[i]}</span>
-        </div>
-      );
-    }
-    return boxs;
-  };
 
   // Player move
   const move = (divNumber) => {
@@ -135,12 +124,7 @@ function App(props) {
           </div>
         </div>
 
-        <div
-          id="board"
-          style={{ gridTemplateColumns: `repeat(${numberOfRow}, 1fr)` }}
-        >
-          {renderBox()}
-        </div>
+        <Board move={move} />
 
         <div className="player-data">
           <div>
