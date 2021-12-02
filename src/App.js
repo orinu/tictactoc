@@ -68,12 +68,12 @@ function App(props) {
     if (props.state.stackArray.length === numberOfRow * numberOfRow) {
       return;
     }
-    let freeState = [];
-    for (let i = 0; i < props.state.stateArray.length; i++) {
-      if (props.state.stateArray[i] === null) {
-        freeState.push(i);
+    const freeState = props.state.stateArray.reduce((previousValue, currentValue, i) => {
+      if (currentValue === null) {
+        previousValue.push(i);
       }
-    }
+      return previousValue;
+    }, []);
     move(freeState[Math.floor(Math.random() * freeState.length)]);
   };
 
