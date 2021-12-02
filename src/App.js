@@ -4,10 +4,13 @@ import { useDispatch, connect } from "react-redux";
 
 import Board from "./component/Board";
 import Modal from "./component/StartModal";
+import TrashTalk from "./component/TrashTalk";
+import GameWon from "./component/GameWon";
 import ModalWinner from "./component/ModalWinner";
+import YourMother from "./component/YourMother";
+
 import * as action from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
-import yourMother from "./utils/youreMother";
 
 import "./App.css";
 
@@ -74,11 +77,6 @@ function App(props) {
     move(freeState[Math.floor(Math.random() * freeState.length)]);
   };
 
-  // Trash Talk Handler
-  const trashTalkHandler = () => {
-    setMessage(yourMother());
-  };
-
   return (
     <div className="App">
       <div className="container">
@@ -118,37 +116,21 @@ function App(props) {
         </div>
 
         <div className="player-data">
-          <div>
-            <span className="title">Game won: </span>
-            <span className="data">{props.state.player1GameWon} </span>
-          </div>
+          <GameWon player={1} />
         </div>
 
         <Board move={move} />
 
         <div className="player-data">
-          <div>
-            <span className="title">Game won: </span>
-            <span className="data">{props.state.player2GameWon}</span>
-          </div>
+          <GameWon player={2} />
         </div>
 
         <div>
-          <button className="button" onClick={trashTalkHandler}>
-            Trash Talk
-          </button>
+          <TrashTalk setMessage={setMessage} />
         </div>
-        <div className="yourMother">
-          {
-            <h2 id="yourMotherData" style={{ direction: "rtl" }}>
-              {message}
-            </h2>
-          }
-        </div>
+        <YourMother message={message} />
         <div>
-          <button className="button" onClick={trashTalkHandler}>
-            Trash Talk
-          </button>
+          <TrashTalk setMessage={setMessage} />
         </div>
         <div className="footer"></div>
       </div>
