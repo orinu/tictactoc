@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CountDownTimer from "./component/Counter";
-import { useDispatch, connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import Board from "./component/Board";
 import Modal from "./component/StartModal";
@@ -8,6 +8,7 @@ import TrashTalk from "./component/TrashTalk";
 import GameWon from "./component/GameWon";
 import ModalWinner from "./component/ModalWinner";
 import YourMother from "./component/YourMother";
+import NameDisplay from "./component/NameDisplay";
 
 import * as action from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
@@ -16,22 +17,25 @@ import "./App.css";
 
 function App(props) {
   const dispatch = useDispatch();
-  const numberOfRow = props.state.boxNumber;
+  // selectors
+  const timeSec = useSelector((state) => state.time);
+  const numberOfRow = useSelector((state) => state.boxNumber);
+  const stateArray = useSelector((state) => state.stateArray);
+  const stackArray = useSelector((state) => state.stackArray);
+
   // Setting Modal
   const [modalClosed, setModalClose] = useState(true);
   // Time
-  const min = Math.floor(props.state.time / 60);
-  const sec = Math.floor(props.state.time % 60);
+  const min = Math.floor(timeSec / 60);
+  const sec = Math.floor(timeSec % 60);
   const [[mins, secs], setTime] = React.useState([min, sec]);
   // Winner
   const [winner, setWinner] = useState(false);
   const [tie, setTie] = useState(false);
   // Trash
   const [message, setMessage] = useState("");
-
   // Timer reset
   const resetTimer = () => setTime([parseInt(min), parseInt(sec)]);
-
   // If modal is open reset timer
   useEffect(resetTimer, [modalClosed]);
 
@@ -46,7 +50,7 @@ function App(props) {
   // Player move
   const move = (divNumber) => {
     // if empty
-    if (!props.state.stateArray[divNumber]) {
+    if (!stateArray[divNumber]) {
       dispatch(action.playerMove(divNumber));
       resetTimer();
       setWinner(winCondition());
@@ -56,7 +60,7 @@ function App(props) {
 
   // Back Handler
   const backHandler = () => {
-    if (props.state.stackArray.length === 0) {
+    if (stackArray.length === 0) {
       return;
     }
     dispatch(action.back());
@@ -65,10 +69,10 @@ function App(props) {
 
   // Random Handler
   const randomHandler = () => {
-    if (props.state.stackArray.length === numberOfRow * numberOfRow) {
+    if (stackArray.length === numberOfRow * numberOfRow) {
       return;
     }
-    const freeState = props.state.stateArray.reduce((previousValue, currentValue, i) => {
+    const freeState = stateArray.reduce((previousValue, currentValue, i) => {
       if (currentValue === null) {
         previousValue.push(i);
       }
@@ -80,10 +84,7 @@ function App(props) {
   return (
     <div className="App">
       <div className="container">
-        <div className="playerName">
-          <span className="title">Name: </span>{" "}
-          <span className="data">{props.state.player1Name} </span>
-        </div>
+        <NameDisplay player={1} />
         <div className="middle-grid-vs-clock">
           <span style={{ fontSize: "150px" }}>vs</span>
           <div className="middle-grid-vs-clock-bottom">
@@ -110,27 +111,21 @@ function App(props) {
           <div id="setting">
             <Modal resetTimer={resetTimer} setModalClose={setModalClose} />
           </div>
-
-          <span className="title">Name: </span>
-          <span className="data">{props.state.player2Name} </span>
+          <NameDisplay player={2} />
         </div>
-
         <div className="player-data">
           <GameWon player={1} />
         </div>
-
         <Board move={move} />
-
         <div className="player-data">
           <GameWon player={2} />
         </div>
-
         <div>
-          <TrashTalk setMessage={setMessage} />
+          <TrashTalk setMessage={setMessage} player={1} />
         </div>
         <YourMother message={message} />
         <div>
-          <TrashTalk setMessage={setMessage} />
+          <TrashTalk setMessage={setMessage} player={2}/>
         </div>
         <div className="footer"></div>
       </div>
@@ -140,10 +135,5 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    state,
-  };
-};
 
-export default connect(mapStateToProps)(App);
+export default App;
