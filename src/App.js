@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CountDownTimer from "./component/counter";
+import CountDownTimer from "./component/Counter";
 import { useDispatch, connect } from "react-redux";
 
 import Modal from "./component/StartModal";
@@ -121,7 +121,7 @@ function App(props) {
         </div>
         <div className="playerName">
           <div id="setting">
-            <Modal setModalClose={setModalClose} />
+            <Modal resetTimer={resetTimer} setModalClose={setModalClose} />
           </div>
 
           <span className="title">Name: </span>

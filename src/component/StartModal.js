@@ -44,6 +44,7 @@ function ModalExampleModal(props) {
       })
     );
     props.setModalClose(true);
+    props.resetTimer()
     setOpen(false);
   };
 
@@ -52,11 +53,13 @@ function ModalExampleModal(props) {
       onClose={() => {
         props.setModalClose(true);
         setOpen(false);
+     
       }}
       onOpen={() => {
         props.setModalClose(false);
         setOpen(true);
       }}
+      closeOnDimmerClick={false}
       open={open}
       trigger={
         <Button className="button" style={{ backgroundColor: "transparent" }}>
@@ -64,7 +67,12 @@ function ModalExampleModal(props) {
         </Button>
       }
     >
-      <Modal.Header>Tic Tac Toe </Modal.Header>
+      <Modal.Header>
+        <div className="header-modal">
+          <span> Tic Tac Toe</span>
+          <Icon onClick={() => {props.setModalClose(true);  setOpen(false)} } link name='close' />
+        </div>
+        </Modal.Header>
       <Modal.Content style={{ textAlign: "right", direction: "rtl" }}>
         <Modal.Description>
           <h2>עוד רגע מתחילים לשחק</h2>
