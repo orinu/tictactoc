@@ -85,6 +85,7 @@ function ModalExampleModal({ resetTimer, setModalClose }) {
             <h2>עוד רגע מתחילים לשחק</h2>
             <h3>הכנס את הנתונים הבאים:</h3>
             <div className="input-form">
+              
               <Input
                 className="input-modal"
                 icon="tags"
@@ -138,6 +139,7 @@ function ModalExampleModal({ resetTimer, setModalClose }) {
         <Modal.Actions style={{ display: "flex" }}>
           <Button
             style={{ backgroundColor: "#14213d" }}
+            type="submit" 
             content="התחל"
             labelPosition="left"
             icon="angle left"
