@@ -73,7 +73,6 @@ function App() {
         <TrashTalk setMessage={setMessage} player={2} />
         <div className="footer"></div>
       </div>
-      <div> </div>
       {(winner || tie) && <ModalWinner tie={tie} playerName={winner} resetTimer={resetTimer} />}
     </div>
   );
