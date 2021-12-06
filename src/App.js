@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Board from "./component/Board";
-import Modal from "./component/StartModal";
-import TrashTalk from "./component/TrashTalk";
-import GameWon from "./component/GameWon";
-import ModalWinner from "./component/ModalWinner";
-import YourMother from "./component/YourMother";
-import NameDisplay from "./component/NameDisplay";
+import Modal from "./component/Modal/StartModal";
+import TrashTalk from "./component/trashTalk/TrashTalk";
+import GameWon from "./component/dataDisplay/GameWonDisplay";
+import ModalWinner from "./component/Modal/ModalWinner";
+import YourMother from "./component/trashTalk/YourMother";
+import NameDisplay from "./component/dataDisplay/NameDisplay";
 
-import * as action from "./store/action";
+import {playerMove} from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
 
 import "./App.css";
@@ -49,7 +49,7 @@ function App() {
   const move = (divNumber) => {
     // if empty
     if (!stateArray[divNumber]) {
-      dispatch(action.playerMove(divNumber));
+      dispatch(playerMove(divNumber));
       resetTimer();
       setWinner(winCondition());
       setTie(tieCheck());
@@ -72,7 +72,7 @@ function App() {
         <div className="footer"></div>
       </div>
       <div> </div>
-      {(winner || tie) && <ModalWinner tie={tie} playerName={winner} />}
+      {(winner || tie) && <ModalWinner tie={tie} playerName={winner} resetTimer={resetTimer}/>}
     </div>
   );
 }

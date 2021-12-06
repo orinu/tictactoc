@@ -1,5 +1,5 @@
 import React from "react";
-import yourMother from "../utils/youreMother";
+import yourMother from "../../utils/youreMother";
 import { useSelector } from "react-redux";
 
 function TrashTalk({ setMessage, player }) {

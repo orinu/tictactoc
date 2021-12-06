@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, Modal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStateArray } from "../utils/utils";
-import * as actions from "../store/action";
+import { makeStateArray } from "../../utils/utils";
+import * as actions from "../../store/action";
 import "./Modal.css";
 
-function ModalWinner({tie , playerName }) {
+function ModalWinner({ tie, playerName, resetTimer }) {
   const dispatch = useDispatch();
   // modal open close
   const [open, setOpen] = useState(true);
@@ -20,7 +20,9 @@ function ModalWinner({tie , playerName }) {
         stackArray: [],
       })
     );
+
     setOpen(false);
+    resetTimer()
   };
 
   return (
