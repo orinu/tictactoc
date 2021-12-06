@@ -42,7 +42,7 @@ function App() {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setMessage("");
-    }, 3000);
+    }, 4000);
     return () => clearTimeout(timeOut);
   }, [message]);
 
