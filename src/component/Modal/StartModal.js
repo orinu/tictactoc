@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Button, Input, Modal, Icon } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 
-import * as utils from "../../utils/utils";
-import * as action from "../../store/action";
+import makeStateArray from "../../utils/utils";
+import { startGame } from "../../store/action";
 import "./Modal.css";
 
 function ModalExampleModal({ resetTimer, setModalClose }) {
@@ -34,12 +34,12 @@ function ModalExampleModal({ resetTimer, setModalClose }) {
   // on submit
   const submitHandler = () => {
     dispatch(
-      action.startGame({
+      startGame({
         boxNumber,
         time,
         player1Name,
         player2Name,
-        stateArray: utils.makeStateArray(boxNumber),
+        stateArray: makeStateArray(boxNumber),
         stackArray: [],
       })
     );

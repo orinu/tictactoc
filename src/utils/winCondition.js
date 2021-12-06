@@ -1,6 +1,6 @@
 import store from "../store/store";
 
-import * as action from "../store/action";
+import { incPlayer1Win, incPlayer2Win } from "../store/action";
 
 export function winCondition() {
   const stateArray = store.getState().stateArray;
@@ -72,10 +72,10 @@ function declare(array) {
   const player2Name = store.getState().player2Name;
 
   if (array[0] === "X") {
-    store.dispatch(action.incPlayer1Win());
+    store.dispatch(incPlayer1Win());
     return player1Name;
   }
-  store.dispatch(action.incPlayer2Win());
+  store.dispatch(incPlayer2Win());
   return player2Name;
 }
 

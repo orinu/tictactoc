@@ -1,9 +1,9 @@
 import React from "react";
 import CountDownTimer from './Counter'
-import { useSelector , useDispatch} from "react-redux";
-import * as action from "../../store/action";
+import { useSelector, useDispatch } from "react-redux";
+import { back } from "../../store/action";
 
-function Upper({move , modalClosed, resetTimer, setTime, mins, secs}) {
+function Upper({ move, modalClosed, resetTimer, setTime, mins, secs }) {
   const dispatch = useDispatch();
   const stackArray = useSelector((state) => state.stackArray);
   const numberOfRow = useSelector((state) => state.boxNumber);
@@ -23,12 +23,12 @@ function Upper({move , modalClosed, resetTimer, setTime, mins, secs}) {
     move(freeState[Math.floor(Math.random() * freeState.length)]);
   };
 
-   // Back Handler
-   const backHandler = () => {
+  // Back Handler
+  const backHandler = () => {
     if (stackArray.length === 0) {
       return;
     }
-    dispatch(action.back());
+    dispatch(back());
     resetTimer();
   };
 

@@ -9,7 +9,7 @@ import ModalWinner from "./component/Modal/ModalWinner";
 import YourMother from "./component/trashTalk/YourMother";
 import NameDisplay from "./component/dataDisplay/NameDisplay";
 
-import {playerMove} from "./store/action";
+import { playerMove } from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
 
 import "./App.css";
@@ -61,8 +61,10 @@ function App() {
       <div className="container">
         <NameDisplay player={1} />
         <Upper move={move} modalClosed={modalClosed} setTime={setTime} resetTimer={resetTimer} setTime={setTime} mins={mins} secs={secs} />
-        <Modal resetTimer={resetTimer} setModalClose={setModalClose} />
-        <NameDisplay player={2} />
+        <div className="playerName">
+          <Modal resetTimer={resetTimer} setModalClose={setModalClose} />
+          <NameDisplay player={2} />
+        </div>
         <GameWon player={1} />
         <Board move={move} />
         <GameWon player={2} />
@@ -72,7 +74,7 @@ function App() {
         <div className="footer"></div>
       </div>
       <div> </div>
-      {(winner || tie) && <ModalWinner tie={tie} playerName={winner} resetTimer={resetTimer}/>}
+      {(winner || tie) && <ModalWinner tie={tie} playerName={winner} resetTimer={resetTimer} />}
     </div>
   );
 }
