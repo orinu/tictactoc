@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Board from "./component/Board";
-import Modal from "./component/Modal/StartModal";
 import TrashTalk from "./component/trashTalk/TrashTalk";
 import GameWon from "./component/dataDisplay/GameWonDisplay";
 import ModalWinner from "./component/Modal/ModalWinner";
 import YourMother from "./component/trashTalk/YourMother";
 import NameDisplay from "./component/dataDisplay/NameDisplay";
+import SettingWithName from './component/SettingWithName'
+import Footer from "./component/Footer";
 
 import { playerMove } from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
@@ -61,17 +62,14 @@ function App() {
       <div className="container">
         <NameDisplay player={1} />
         <Upper move={move} modalClosed={modalClosed} setTime={setTime} resetTimer={resetTimer} setTime={setTime} mins={mins} secs={secs} />
-        <div className="playerName">
-          <Modal resetTimer={resetTimer} setModalClose={setModalClose} />
-          <NameDisplay player={2} />
-        </div>
+        <SettingWithName resetTimer={resetTimer} setModalClose={setModalClose} />
         <GameWon player={1} />
         <Board move={move} />
         <GameWon player={2} />
         <TrashTalk setMessage={setMessage} player={1} />
         <YourMother message={message} />
         <TrashTalk setMessage={setMessage} player={2} />
-        <div className="footer"></div>
+        <Footer move={move} />
       </div>
       {(winner || tie) && <ModalWinner tie={tie} playerName={winner} resetTimer={resetTimer} />}
     </div>
