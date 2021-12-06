@@ -1,6 +1,8 @@
 import React from "react";
 import CountDownTimer from './Counter'
 import { useSelector, useDispatch } from "react-redux";
+import BackButton from "./BackButton";
+import RandomButton from "./RandomButton";
 import { back } from "../../store/action";
 
 function Upper({ move, modalClosed, resetTimer, setTime, mins, secs }) {
@@ -36,9 +38,7 @@ function Upper({ move, modalClosed, resetTimer, setTime, mins, secs }) {
     <div className="middle-grid-vs-clock">
       <span style={{ fontSize: "150px" }}>vs</span>
       <div className="middle-grid-vs-clock-bottom">
-        <button className="button" onClick={randomHandler}>
-          בחר אקראית
-        </button>
+        <RandomButton randomHandler={randomHandler}/>
         <span style={{ fontSize: "1.4em", alignSelf: "center" }}>
           {modalClosed && (
             <CountDownTimer
@@ -50,9 +50,7 @@ function Upper({ move, modalClosed, resetTimer, setTime, mins, secs }) {
             />
           )}
         </span>
-        <button className="button" onClick={backHandler}>
-          צעד אחורה
-        </button>
+        <BackButton backHandler={backHandler}/>
       </div>
     </div>
   );
