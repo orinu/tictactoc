@@ -1,32 +1,41 @@
 import React, { useState, useEffect } from "react";
-import CountDownTimer from "./component/counter";
-import { useDispatch, connect } from "react-redux";
+import CountDownTimer from "./component/Counter";
+import { useSelector, useDispatch } from "react-redux";
 
+import Board from "./component/Board";
 import Modal from "./component/StartModal";
+import TrashTalk from "./component/TrashTalk";
+import GameWon from "./component/GameWon";
 import ModalWinner from "./component/ModalWinner";
+import YourMother from "./component/YourMother";
+import NameDisplay from "./component/NameDisplay";
+
 import * as action from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
-import yourMother from "./utils/youreMother";
+
 import "./App.css";
 
-function App(props) {
+function App() {
   const dispatch = useDispatch();
-  const numberOfRow = props.state.boxNumber;
+  // selectors
+  const timeSec = useSelector((state) => state.time);
+  const numberOfRow = useSelector((state) => state.boxNumber);
+  const stateArray = useSelector((state) => state.stateArray);
+  const stackArray = useSelector((state) => state.stackArray);
+
   // Setting Modal
   const [modalClosed, setModalClose] = useState(true);
   // Time
-  const min = Math.floor(props.state.time / 60);
-  const sec = Math.floor(props.state.time % 60);
+  const min = Math.floor(timeSec / 60);
+  const sec = Math.floor(timeSec % 60);
   const [[mins, secs], setTime] = React.useState([min, sec]);
   // Winner
   const [winner, setWinner] = useState(false);
   const [tie, setTie] = useState(false);
   // Trash
   const [message, setMessage] = useState("");
-
   // Timer reset
   const resetTimer = () => setTime([parseInt(min), parseInt(sec)]);
-
   // If modal is open reset timer
   useEffect(resetTimer, [modalClosed]);
 
@@ -38,23 +47,10 @@ function App(props) {
     return () => clearTimeout(timeOut);
   }, [message]);
 
-  // render number of boxs from user input
-  const renderBox = (boxNumber) => {
-    const boxs = [];
-    for (let i = 0; i < numberOfRow * numberOfRow; i++) {
-      boxs.push(
-        <div key={i} className={`box box${i}`} onClick={() => move(i)}>
-          <span className="inner-text">{props.state.stateArray[i]}</span>
-        </div>
-      );
-    }
-    return boxs;
-  };
-
   // Player move
   const move = (divNumber) => {
     // if empty
-    if (!props.state.stateArray[divNumber]) {
+    if (!stateArray[divNumber]) {
       dispatch(action.playerMove(divNumber));
       resetTimer();
       setWinner(winCondition());
@@ -64,7 +60,7 @@ function App(props) {
 
   // Back Handler
   const backHandler = () => {
-    if (props.state.stackArray.length === 0) {
+    if (stackArray.length === 0) {
       return;
     }
     dispatch(action.back());
@@ -73,30 +69,22 @@ function App(props) {
 
   // Random Handler
   const randomHandler = () => {
-    if (props.state.stackArray.length === numberOfRow * numberOfRow) {
+    if (stackArray.length === numberOfRow * numberOfRow) {
       return;
     }
-    let freeState = [];
-    for (let i = 0; i < props.state.stateArray.length; i++) {
-      if (props.state.stateArray[i] === null) {
-        freeState.push(i);
+    const freeState = stateArray.reduce((previousValue, currentValue, i) => {
+      if (currentValue === null) {
+        previousValue.push(i);
       }
-    }
+      return previousValue;
+    }, []);
     move(freeState[Math.floor(Math.random() * freeState.length)]);
-  };
-
-  // Trash Talk Handler
-  const trashTalkHandler = () => {
-    setMessage(yourMother());
   };
 
   return (
     <div className="App">
       <div className="container">
-        <div className="playerName">
-          <span className="title">Name: </span>{" "}
-          <span className="data">{props.state.player1Name} </span>
-        </div>
+        <NameDisplay player={1} />
         <div className="middle-grid-vs-clock">
           <span style={{ fontSize: "150px" }}>vs</span>
           <div className="middle-grid-vs-clock-bottom">
@@ -121,50 +109,23 @@ function App(props) {
         </div>
         <div className="playerName">
           <div id="setting">
-            <Modal setModalClose={setModalClose} />
+            <Modal resetTimer={resetTimer} setModalClose={setModalClose} />
           </div>
-
-          <span className="title">Name: </span>
-          <span className="data">{props.state.player2Name} </span>
+          <NameDisplay player={2} />
         </div>
-
         <div className="player-data">
-          <div>
-            <span className="title">Game won: </span>
-            <span className="data">{props.state.player1GameWon} </span>
-          </div>
+          <GameWon player={1} />
         </div>
-
-        <div
-          id="board"
-          style={{ gridTemplateColumns: `repeat(${numberOfRow}, 1fr)` }}
-        >
-          {renderBox()}
-        </div>
-
+        <Board move={move} />
         <div className="player-data">
-          <div>
-            <span className="title">Game won: </span>
-            <span className="data">{props.state.player2GameWon}</span>
-          </div>
-        </div>
-
-        <div>
-          <button className="button" onClick={trashTalkHandler}>
-            Trash Talk
-          </button>
-        </div>
-        <div className="yourMother">
-          {
-            <h2 id="yourMotherData" style={{ direction: "rtl" }}>
-              {message}
-            </h2>
-          }
+          <GameWon player={2} />
         </div>
         <div>
-          <button className="button" onClick={trashTalkHandler}>
-            Trash Talk
-          </button>
+          <TrashTalk setMessage={setMessage} player={1} />
+        </div>
+        <YourMother message={message} />
+        <div>
+          <TrashTalk setMessage={setMessage} player={2} />
         </div>
         <div className="footer"></div>
       </div>
@@ -174,10 +135,4 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    state,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

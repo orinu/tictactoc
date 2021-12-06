@@ -6,7 +6,7 @@ import * as utils from "../utils/utils";
 import * as action from "../store/action";
 import "./Modal.css";
 
-function ModalExampleModal(props) {
+function ModalExampleModal({ resetTimer, setModalClose }) {
   const [open, setOpen] = useState(true);
   const [boxNumber, setBoxNumber] = useState(3);
   const [player1Name, setPlayer1Name] = useState("player 1");
@@ -43,20 +43,22 @@ function ModalExampleModal(props) {
         stackArray: [],
       })
     );
-    props.setModalClose(true);
+    setModalClose(true);
+    resetTimer();
     setOpen(false);
   };
 
   return (
     <Modal
       onClose={() => {
-        props.setModalClose(true);
+        setModalClose(true);
         setOpen(false);
       }}
       onOpen={() => {
-        props.setModalClose(false);
+        setModalClose(false);
         setOpen(true);
       }}
+      closeOnDimmerClick={false}
       open={open}
       trigger={
         <Button className="button" style={{ backgroundColor: "transparent" }}>
@@ -64,7 +66,19 @@ function ModalExampleModal(props) {
         </Button>
       }
     >
-      <Modal.Header>Tic Tac Toe </Modal.Header>
+      <Modal.Header>
+        <div className="header-modal">
+          <span> Tic Tac Toe</span>
+          <Icon
+            onClick={() => {
+              setModalClose(true);
+              setOpen(false);
+            }}
+            link
+            name="close"
+          />
+        </div>
+      </Modal.Header>
       <Modal.Content style={{ textAlign: "right", direction: "rtl" }}>
         <Modal.Description>
           <h2>עוד רגע מתחילים לשחק</h2>

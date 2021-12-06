@@ -8,3 +8,8 @@
 .input-modal {
   margin: 0.5em;
 }
+
+.header-modal{
+  display: flex;
+  justify-content: space-between;
+}

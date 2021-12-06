@@ -5,7 +5,7 @@ import { makeStateArray } from "../utils/utils";
 import * as actions from "../store/action";
 import "./Modal.css";
 
-function ModalWinner(props) {
+function ModalWinner({tie , playerName }) {
   const dispatch = useDispatch();
   // modal open close
   const [open, setOpen] = useState(true);
@@ -38,7 +38,7 @@ function ModalWinner(props) {
       <Modal.Header>Tic Tac Toe </Modal.Header>
       <Modal.Content style={{ textAlign: "right", direction: "rtl" }}>
         <Modal.Description style={{ textAlign: "center" }}>
-          {props.tie ? (
+          {tie ? (
             <div>
               <h2>תיקו</h2>
               <h1>כמה זה כבר קשה לנצח באיקס עיגול?</h1>
@@ -46,7 +46,7 @@ function ModalWinner(props) {
           ) : (
             <div>
               <h2>ברכות לזוכים</h2>
-              <h1>{props.playerName} ניצח!</h1>
+              <h1>{playerName} ניצח!</h1>
             </div>
           )}
         </Modal.Description>
