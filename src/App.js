@@ -7,7 +7,7 @@ import GameWon from "./component/dataDisplay/GameWonDisplay";
 import ModalWinner from "./component/Modal/ModalWinner";
 import YourMother from "./component/trashTalk/YourMother";
 import NameDisplay from "./component/dataDisplay/NameDisplay";
-import SettingWithName from './component/SettingWithName'
+import SettingWithName from './component/SettingModalWithNameDisplay'
 import Footer from "./component/Footer";
 
 import { playerMove } from "./store/action";
