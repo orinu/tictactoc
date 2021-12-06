@@ -49,102 +49,104 @@ function ModalExampleModal({ resetTimer, setModalClose }) {
   };
 
   return (
-    <Modal
-      onClose={() => {
-        setModalClose(true);
-        setOpen(false);
-      }}
-      onOpen={() => {
-        setModalClose(false);
-        setOpen(true);
-      }}
-      closeOnDimmerClick={false}
-      open={open}
-      trigger={
-        <Button className="button" style={{ backgroundColor: "transparent" }}>
-          <Icon name="setting" size="huge" style={{ color: "white" }} />
-        </Button>
-      }
-    >
-      <Modal.Header>
-        <div className="header-modal">
-          <span> Tic Tac Toe</span>
-          <Icon
-            onClick={() => {
-              setModalClose(true);
-              setOpen(false);
-            }}
-            link
-            name="close"
-          />
-        </div>
-      </Modal.Header>
-      <Modal.Content style={{ textAlign: "right", direction: "rtl" }}>
-        <Modal.Description>
-          <h2>עוד רגע מתחילים לשחק</h2>
-          <h3>הכנס את הנתונים הבאים:</h3>
-          <div className="input-form">
-            <Input
-              className="input-modal"
-              icon="tags"
-              value={boxNumber}
-              iconPosition="left"
-              label={{ tag: true, content: "גודל המשחק" }}
-              labelPosition="left"
-              placeholder="עבור 5X5 הזן 5"
-              onChange={(numberInput) => {
-                boxSizeHandler(numberInput.target.value);
+    <div id="setting">
+      <Modal
+        onClose={() => {
+          setModalClose(true);
+          setOpen(false);
+        }}
+        onOpen={() => {
+          setModalClose(false);
+          setOpen(true);
+        }}
+        closeOnDimmerClick={false}
+        open={open}
+        trigger={
+          <Button className="button" style={{ backgroundColor: "transparent" }}>
+            <Icon name="setting" size="huge" style={{ color: "white" }} />
+          </Button>
+        }
+      >
+        <Modal.Header>
+          <div className="header-modal">
+            <span> Tic Tac Toe</span>
+            <Icon
+              onClick={() => {
+                setModalClose(true);
+                setOpen(false);
               }}
-            />
-            <Input
-              className="input-modal"
-              icon="gamepad"
-              value={player1Name}
-              iconPosition="left"
-              label={{ tag: true, content: "שם שחקן 1" }}
-              labelPosition="left"
-              placeholder="הזן שם שחקן"
-              onChange={(player1NameInput) => {
-                setPlayer1Name(player1NameInput.target.value);
-              }}
-            />
-            <Input
-              className="input-modal"
-              icon="gamepad"
-              iconPosition="left"
-              value={player2Name}
-              label={{ tag: true, content: "שם שחקן 2" }}
-              labelPosition="left"
-              placeholder="הזן שם שחקן"
-              onChange={(player2NameInput) => {
-                setPlayer2Name(player2NameInput.target.value);
-              }}
-            />
-            <Input
-              className="input-modal"
-              icon="time"
-              iconPosition="left"
-              value={time}
-              label={{ tag: true, content: "שניות לתור" }}
-              labelPosition="left"
-              onChange={(timeInput) => {
-                timeHandler(timeInput.target.value);
-              }}
+              link
+              name="close"
             />
           </div>
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions style={{ display: "flex" }}>
-        <Button
-          style={{ backgroundColor: "#14213d" }}
-          content="התחל"
-          labelPosition="left"
-          icon="angle left"
-          onClick={submitHandler}
-          positive
-        />
-      </Modal.Actions>
-    </Modal>
+        </Modal.Header>
+        <Modal.Content style={{ textAlign: "right", direction: "rtl" }}>
+          <Modal.Description>
+            <h2>עוד רגע מתחילים לשחק</h2>
+            <h3>הכנס את הנתונים הבאים:</h3>
+            <div className="input-form">
+              <Input
+                className="input-modal"
+                icon="tags"
+                value={boxNumber}
+                iconPosition="left"
+                label={{ tag: true, content: "גודל המשחק" }}
+                labelPosition="left"
+                placeholder="עבור 5X5 הזן 5"
+                onChange={(numberInput) => {
+                  boxSizeHandler(numberInput.target.value);
+                }}
+              />
+              <Input
+                className="input-modal"
+                icon="gamepad"
+                value={player1Name}
+                iconPosition="left"
+                label={{ tag: true, content: "שם שחקן 1" }}
+                labelPosition="left"
+                placeholder="הזן שם שחקן"
+                onChange={(player1NameInput) => {
+                  setPlayer1Name(player1NameInput.target.value);
+                }}
+              />
+              <Input
+                className="input-modal"
+                icon="gamepad"
+                iconPosition="left"
+                value={player2Name}
+                label={{ tag: true, content: "שם שחקן 2" }}
+                labelPosition="left"
+                placeholder="הזן שם שחקן"
+                onChange={(player2NameInput) => {
+                  setPlayer2Name(player2NameInput.target.value);
+                }}
+              />
+              <Input
+                className="input-modal"
+                icon="time"
+                iconPosition="left"
+                value={time}
+                label={{ tag: true, content: "שניות לתור" }}
+                labelPosition="left"
+                onChange={(timeInput) => {
+                  timeHandler(timeInput.target.value);
+                }}
+              />
+            </div>
+          </Modal.Description>
+        </Modal.Content>
+        <Modal.Actions style={{ display: "flex" }}>
+          <Button
+            style={{ backgroundColor: "#14213d" }}
+            content="התחל"
+            labelPosition="left"
+            icon="angle left"
+            onClick={submitHandler}
+            positive
+          />
+        </Modal.Actions>
+      </Modal>
+    </div>
   );
 }
 
