@@ -1,5 +1,5 @@
 import React from "react";
-import yourMother from "../utils/youreMother";
+import yourMother from "../../utils/youreMother";
 import { useSelector } from "react-redux";
 
 function TrashTalk({ setMessage, player }) {
@@ -12,9 +12,11 @@ function TrashTalk({ setMessage, player }) {
   };
 
   return (
-    <button className="button" onClick={trashTalkHandler}>
-      Trash Talk
-    </button>
+    <div>
+      <button className="button" onClick={trashTalkHandler}>
+        Trash Talk
+      </button>
+    </div>
   );
 }
 
