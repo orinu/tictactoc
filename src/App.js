@@ -12,6 +12,7 @@ import Footer from "./component/Footer";
 
 import { playerMove } from "./store/action";
 import { winCondition, tieCheck } from "./utils/winCondition";
+import bestMoveAi from './utils/AI'
 
 import "./App.css";
 import Upper from "./component/upper/Upper";
@@ -54,6 +55,13 @@ function App() {
       resetTimer();
       setWinner(winCondition());
       setTie(tieCheck());
+      if (true) {
+        dispatch(playerMove(bestMoveAi()));
+        resetTimer();
+        setWinner(winCondition());
+        setTie(tieCheck());
+      }
+
     }
   };
 
